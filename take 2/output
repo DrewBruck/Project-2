@@ -1,0 +1,21 @@
+TestFunctionForHashTables...
+Words filename: wordsEn.txt
+Query filename: query_words.txt
+Collisions: 108048
+Number of items: 109582
+Size of hash table: 222461
+Load factor: 0.49259
+Avg. number of collisions: 0.986001
+alone Found 1
+binary Found 1
+catastrophe Found 1
+dog Found 1
+family Found 1
+loath Found 2
+oath Found 1
+zebra Found 3
+bikini Found 1
+zucchiniaa Not Found 3
+lwa Not Found 1
+panacea Found 2
+pnca Not Found 1
