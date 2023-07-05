@@ -1,13 +1,11 @@
-/*****************************************************************************
-  Title          : DoubleHashing.h
-  Author         : Renat Khalikov
-  Created on     : April 06, 2017
-  Description    : implementation of double hashing table for parts 2 and 3 of
-                   Assignment 3. Table size is 101. Rehash factor is 43. 
-  Purpose        : 
-  Usage          :
-  Build with     :
+/*
+Name: Drew Bruck
+Class: CSCI 335
+Professor: Jaime Canizales
+Assignment: Project 2
+Description: Modified version of double_hashing.h for Project 2.
 */
+
 #ifndef DOUBLE_HASHING_H
 #define DOUBLE_HASHING_H
 
@@ -42,23 +40,7 @@ int NextPrimeDouble(size_t n) {
 }
 }  // namespace
 
-// DoubleHashing table class
-//
-// CONSTRUCTION: an approximate initial size or default of 101. 
-//               Rehash factor: 43.
-//
-// ******************PUBLIC OPERATIONS*****************************************
-// bool insert( x )       --> Insert x
-// bool remove( x )       --> Remove x
-// bool contains( x )     --> Return true if x is present
-// void makeEmpty( )      --> Remove all items
-// double getTotalNumberOfElements( )      --> Return total number of elements
-//                                             in hash table
-// double getTotalSizeOfTable( )           --> Return total size of the 
-//                                             hash table
-// void getTotalNumberOfCollisions ( n )   --> Assign n the total number
-//                                             of collisions
-// void resetCollisions (  )               --> Set total collisions to 0
+
 template <typename HashedObj>
 class HashTableDouble {
  public:
@@ -119,15 +101,13 @@ class HashTableDouble {
     return true;
   }
 
-  // getTotalNumberOfElements() returns the size of the hash table by
-  // converting private member current_size_ of type size_t to type double
+  // returns the size of the hash table
   double getTotalNumberOfElements( ) { return static_cast<double>( current_size_ ); }
 
   // getTotalSizeOfTable() assigns n to the size of the array
   double getTotalSizeOfTable( ) { return static_cast<double>( array_.size() ); }
 
-  // getTotalNumberOfCollisions() returns the number of collitions that occured
-  // during insert operation
+  //returns the number of collitions that occurred during insert operation
   void getTotalNumberOfCollisions (size_t &n) { n = number_of_collisions_; }
 
   // resetCollisions() resets number of collisions to 0
@@ -148,13 +128,13 @@ class HashTableDouble {
 
   std::vector<HashEntry> array_;
   size_t current_size_;
-  // mutable value of number_of_collisions_ can change even in const functions
+  //initialize counter for collisions, mutable to allow changes even with const
   mutable size_t number_of_collisions_ = 0; 
 
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
-  // FindPos() finds the next available position to insert into hash table by
+  // FindPos() finds the next available position in the hash table by
   // calling DoubleHash() function
   size_t FindPos(const HashedObj & x) const {
     size_t current_pos = InternalHash(x);

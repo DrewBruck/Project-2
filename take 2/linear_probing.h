@@ -1,12 +1,9 @@
-/*****************************************************************************
-  Title          : LinearProbing.h
-  Author         : Renat Khalikov
-  Created on     : April 06, 2017
-  Description    : implementation of linear probing table for part 1 of
-                   Assignment 3. 
-  Purpose        : 
-  Usage          :
-  Build with     :
+/*
+Name: Drew Bruck
+Class: CSCI 335
+Professor: Jaime Canizales
+Assignment: Project 2
+Description: Modified version of double_hashing.h for Project 2.
 */
 #ifndef LINEAR_PROBING_H
 #define LINEAR_PROBING_H
@@ -43,23 +40,7 @@ int NextPrimeLinear(size_t n) {
 }
 }  // namespace
 
-// LinearProbing hash table class
-//
-// CONSTRUCTION: an approximate initial size or default of 101. 
-//               Rehash factor: 43.
-//
-// ******************PUBLIC OPERATIONS*****************************************
-// bool insert( x )       --> Insert x
-// bool remove( x )       --> Remove x
-// bool contains( x )     --> Return true if x is present
-// void makeEmpty( )      --> Remove all items
-// double getTotalNumberOfElements( )      --> Return total number of elements
-//                                             in hash table
-// double getTotalSizeOfTable( )           --> Return total size of the 
-//                                             hash table
-// void getTotalNumberOfCollisions ( n )   --> Assign n the total number
-//                                             of collisions
-// void resetCollisions (  )               --> Set total collisions to 0
+// Linear probing implementation
 template <typename HashedObj>
 class HashTableLinear {
  public:
@@ -120,15 +101,13 @@ class HashTableLinear {
     return true;
   }
 
-  // getTotalNumberOfElements() returns the size of the hash table by
-  // converting private member current_size_ of type size_t to type double
+ // returns the size of the hash table
   double getTotalNumberOfElements( ) { return static_cast<double>( current_size_ ); }
 
   // getTotalSizeOfTable() assigns n to the size of the array
   double getTotalSizeOfTable( ) { return static_cast<double>( array_.size() ); }
 
-  // getTotalNumberOfCollisions() returns the number of collitions that occured
-  // during insert operation
+    //returns the number of collitions that occurred during insert operation
   void getTotalNumberOfCollisions (size_t &n) { n = number_of_collisions_; }
 
   // resetCollisions() resets number of collisions to 0
@@ -149,9 +128,10 @@ class HashTableLinear {
 
   std::vector<HashEntry> array_;
   size_t current_size_;
-  // mutable value of number_of_collisions_ can change even in const functions
-  mutable size_t number_of_collisions_;
-
+  
+  //initialize counter for collisions, mutable to allow changes even with const
+  mutable size_t number_of_collisions_; 
+  
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
@@ -159,7 +139,7 @@ class HashTableLinear {
     //size_t offset = 1;
     size_t current_pos = InternalHash(x);
 
-    // linear resolution
+    //linear procedure
     while (  array_[current_pos].info_ != EMPTY &&
              array_[current_pos].element_ != x  ) {
       current_pos += 1;  // Compute ith probe.
