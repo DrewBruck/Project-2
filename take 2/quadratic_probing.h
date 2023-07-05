@@ -152,7 +152,7 @@ class HashTable {
       current_pos += (offset);  // Compute ith probe.
       offset += 1;
       if (current_pos >= array_.size()){
-	        current_pos -= array_.size();}
+	        current_pos % array_.size();}
           collisions_count_++;
     }
     
