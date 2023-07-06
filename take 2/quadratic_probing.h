@@ -60,6 +60,7 @@ class HashTable {
   
   void MakeEmpty() {
     current_size_ = 0;
+    collisions_count_= 0;
     for (auto &entry : array_)
       entry.info_ = EMPTY;
   }
@@ -110,7 +111,7 @@ class HashTable {
   // getTotalSizeOfTable() assigns n to the size of the array
   size_t getTotalSizeOfTable() { return array_.size(); }
 
-  //returns the number of collitions that occurred during insert operation
+  // returns the number of collisions that occurred during insert operation
   void getTotalNumberOfCollisions (size_t &n) { n = collisions_count_; }
 
   // resetCollisions() resets number of collisions to 0
@@ -152,7 +153,7 @@ class HashTable {
       current_pos += (offset);  // Compute ith probe.
       offset += 1;
       if (current_pos >= array_.size()){
-	        current_pos % array_.size();}
+	        current_pos -= array_.size();}
           collisions_count_++;
     }
     

@@ -55,7 +55,7 @@ class HashTableDouble {
   
   void MakeEmpty() {
     current_size_ = 0;
-    number_of_collisions_ = 0;
+    collisions_count_ = 0;
     for (auto &entry : array_)
       entry.info_ = EMPTY;
   }
@@ -107,11 +107,11 @@ class HashTableDouble {
   // getTotalSizeOfTable() assigns n to the size of the array
   double getTotalSizeOfTable( ) { return static_cast<double>( array_.size() ); }
 
-  //returns the number of collitions that occurred during insert operation
-  void getTotalNumberOfCollisions (size_t &n) { n = number_of_collisions_; }
+  //returns the number of collisions that occurred during insert operation
+  void getTotalNumberOfCollisions (size_t &n) { n = collisions_count_; }
 
   // resetCollisions() resets number of collisions to 0
-  void resetCollisions (  ) { number_of_collisions_ = 0; }
+  void resetCollisions (  ) { collisions_count_ = 0; }
 
  private:        
   struct HashEntry {
@@ -129,7 +129,7 @@ class HashTableDouble {
   std::vector<HashEntry> array_;
   size_t current_size_;
   //initialize counter for collisions, mutable to allow changes even with const
-  mutable size_t number_of_collisions_ = 0; 
+  mutable size_t collisions_count_ = 0; 
 
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
@@ -144,7 +144,7 @@ class HashTableDouble {
       if (current_pos >= array_.size()) {
         current_pos -= array_.size();
       }
-      number_of_collisions_++;
+      collisions_count_++;
     }
     return current_pos;
   }
