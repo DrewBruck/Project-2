@@ -21,20 +21,20 @@ void ParseWord(const HashTableDouble<string>& dictionary, const string word_in_f
     cout << word_in_file << " is CORRECT" << endl;
   }
   if(!dictionary.Contains(word_in_file)){
-    cout << word_in_file << " is INCORRECT" << "\t" << "**Did you mean:";
+    cout << word_in_file << " is INCORRECT";
     //Case A - adding one character in any possible position
     for(int i = 0; i <word_in_file.length()+1; i++){
       for(char c = 'a'; c <= 'z'; c++){
       string addedWord = word_in_file.substr(0,i) + c + word_in_file.substr(i);
       if(dictionary.Contains(addedWord)){
-        cout << " " << addedWord << "?";}
+        cout << endl << "** " << word_in_file << " -> " << addedWord << " ** case A";}
       }
     }
     //Case B - deleting one character from the word.
     for(int i=0; i < word_in_file.length(); i++){
       string deletedWord = word_in_file.substr(0, i)+ word_in_file.substr(i + 1);
       if (dictionary.Contains(deletedWord)){
-        cout << " " << deletedWord << "?";
+        cout << endl << "** " << word_in_file << " -> " << deletedWord << " ** case B";
       }
     }
 
@@ -42,7 +42,7 @@ void ParseWord(const HashTableDouble<string>& dictionary, const string word_in_f
     for(int i = 0; i < word_in_file.length()-1; i++) {
       string swapCharacter = word_in_file.substr(0,i) + word_in_file[i+1] + word_in_file[i] + word_in_file.substr(i+2);
       if (dictionary.Contains(swapCharacter)){
-        cout << " " << swapCharacter << "?";
+        cout << endl << "** " << word_in_file << " -> " << swapCharacter << " ** case C";
       }
     }
     cout << endl;
