@@ -52,12 +52,12 @@ void CheckQueryFile(HashTableType &hash_table, const string &query_filename) {
     hash_table.resetCollisions();
     if ( hash_table.Contains(word_in_file) ) {
       hash_table.getTotalNumberOfCollisions( total_number_of_collisions );
-      cout << word_in_file << " FOUND " << total_number_of_collisions+1 << " collision(s)."
+      cout << word_in_file << " FOUND " << total_number_of_collisions+1 << " probe(s)."
       << endl;
     }
     else if (!hash_table.Contains(word_in_file)){
       hash_table.getTotalNumberOfCollisions( total_number_of_collisions );
-      cout << word_in_file << " NOT FOUND " << total_number_of_collisions+1 << " collision(s)."
+      cout << word_in_file << " NOT FOUND " << total_number_of_collisions+1 << " probe(s)."
       << endl;
     }
   }
